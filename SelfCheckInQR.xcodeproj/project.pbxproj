@@ -14,6 +14,14 @@
 		586A199927DA1F6A009D3479 /* SelfCheckInQRTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A199827DA1F6A009D3479 /* SelfCheckInQRTests.swift */; };
 		586A19A327DA1F6A009D3479 /* SelfCheckInQRUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19A227DA1F6A009D3479 /* SelfCheckInQRUITests.swift */; };
 		586A19A527DA1F6A009D3479 /* SelfCheckInQRUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19A427DA1F6A009D3479 /* SelfCheckInQRUITestsLaunchTests.swift */; };
+		586A19B427DA2395009D3479 /* QRCodeScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19B327DA2395009D3479 /* QRCodeScanView.swift */; };
+		586A19B627DA25F3009D3479 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19B527DA25F3009D3479 /* ScannerViewController.swift */; };
+		586A19B827DA264F009D3479 /* QRCodeScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19B727DA264F009D3479 /* QRCodeScanViewModel.swift */; };
+		586A19BA27DA270E009D3479 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19B927DA270E009D3479 /* ScannerView.swift */; };
+		586A19BC27DA274E009D3479 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19BB27DA274E009D3479 /* Alert.swift */; };
+		586A19C327DA3391009D3479 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19C227DA3391009D3479 /* HistoryView.swift */; };
+		586A19C627DA452A009D3479 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19C527DA452A009D3479 /* ProfileView.swift */; };
+		586A19C827DA5B50009D3479 /* ProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19C727DA5B50009D3479 /* ProfileDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +52,14 @@
 		586A199E27DA1F6A009D3479 /* SelfCheckInQRUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SelfCheckInQRUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		586A19A227DA1F6A009D3479 /* SelfCheckInQRUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfCheckInQRUITests.swift; sourceTree = "<group>"; };
 		586A19A427DA1F6A009D3479 /* SelfCheckInQRUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfCheckInQRUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		586A19B327DA2395009D3479 /* QRCodeScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScanView.swift; sourceTree = "<group>"; };
+		586A19B527DA25F3009D3479 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		586A19B727DA264F009D3479 /* QRCodeScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScanViewModel.swift; sourceTree = "<group>"; };
+		586A19B927DA270E009D3479 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		586A19BB27DA274E009D3479 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		586A19C227DA3391009D3479 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		586A19C527DA452A009D3479 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		586A19C727DA5B50009D3479 /* ProfileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,10 +110,12 @@
 		586A198627DA1F69009D3479 /* SelfCheckInQR */ = {
 			isa = PBXGroup;
 			children = (
+				586A19BE27DA27D7009D3479 /* Screens */,
+				586A19BD27DA2754009D3479 /* Views */,
 				586A198727DA1F69009D3479 /* SelfCheckInQRApp.swift */,
-				586A198927DA1F69009D3479 /* ContentView.swift */,
 				586A198B27DA1F6A009D3479 /* Assets.xcassets */,
 				586A198D27DA1F6A009D3479 /* Preview Content */,
+				586A19BB27DA274E009D3479 /* Alert.swift */,
 			);
 			path = SelfCheckInQR;
 			sourceTree = "<group>";
@@ -125,6 +143,60 @@
 				586A19A427DA1F6A009D3479 /* SelfCheckInQRUITestsLaunchTests.swift */,
 			);
 			path = SelfCheckInQRUITests;
+			sourceTree = "<group>";
+		};
+		586A19BD27DA2754009D3479 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				586A19B527DA25F3009D3479 /* ScannerViewController.swift */,
+				586A19B927DA270E009D3479 /* ScannerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		586A19BE27DA27D7009D3479 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				586A19C027DA2804009D3479 /* TabBar */,
+				586A19BF27DA27DF009D3479 /* QRCodeScan */,
+				586A19C127DA3351009D3479 /* History */,
+				586A19C427DA451E009D3479 /* Profile */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		586A19BF27DA27DF009D3479 /* QRCodeScan */ = {
+			isa = PBXGroup;
+			children = (
+				586A19B327DA2395009D3479 /* QRCodeScanView.swift */,
+				586A19B727DA264F009D3479 /* QRCodeScanViewModel.swift */,
+			);
+			path = QRCodeScan;
+			sourceTree = "<group>";
+		};
+		586A19C027DA2804009D3479 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				586A198927DA1F69009D3479 /* ContentView.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		586A19C127DA3351009D3479 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				586A19C227DA3391009D3479 /* HistoryView.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		586A19C427DA451E009D3479 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				586A19C527DA452A009D3479 /* ProfileView.swift */,
+				586A19C727DA5B50009D3479 /* ProfileDetailView.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,7 +330,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				586A198A27DA1F69009D3479 /* ContentView.swift in Sources */,
+				586A19C627DA452A009D3479 /* ProfileView.swift in Sources */,
+				586A19C327DA3391009D3479 /* HistoryView.swift in Sources */,
 				586A198827DA1F69009D3479 /* SelfCheckInQRApp.swift in Sources */,
+				586A19B427DA2395009D3479 /* QRCodeScanView.swift in Sources */,
+				586A19BA27DA270E009D3479 /* ScannerView.swift in Sources */,
+				586A19B827DA264F009D3479 /* QRCodeScanViewModel.swift in Sources */,
+				586A19C827DA5B50009D3479 /* ProfileDetailView.swift in Sources */,
+				586A19B627DA25F3009D3479 /* ScannerViewController.swift in Sources */,
+				586A19BC27DA274E009D3479 /* Alert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +502,7 @@
 				DEVELOPMENT_TEAM = QGAQ3AY3R3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to use the camera to scan barcodes.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -451,6 +532,7 @@
 				DEVELOPMENT_TEAM = QGAQ3AY3R3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to use the camera to scan barcodes.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
