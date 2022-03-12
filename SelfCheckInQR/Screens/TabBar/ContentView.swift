@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 enum Tab: String, CaseIterable {
     case qrcode
@@ -14,8 +15,10 @@ enum Tab: String, CaseIterable {
 }
 
 struct ContentView: View {
-    @State private var currentTab: Tab = .qrcode
+    @State var currentTab: Tab = .qrcode
     @State var currentDate: Date = Date()
+    @State var showLoginPage: Bool = true
+    @AppStorage("loginStatus") var loginStatus = false
     
     var body: some View {
         // TabView
@@ -29,7 +32,8 @@ struct ContentView: View {
             .tag(Tab.history)
             .padding(.top)
             
-            ProfileView()
+            ProfileView(showLoginPage: $showLoginPage,
+                        currentTab: $currentTab)
                 .tag(Tab.user)
         }
         
@@ -58,6 +62,9 @@ struct ContentView: View {
         }
         .padding([.horizontal,.top])
         .padding(.bottom,10)
+        .onAppear(perform: {
+            loginStatus = UserDefaults.standard.bool(forKey: "loginStatus")
+        })
     }
 }
 

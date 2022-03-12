@@ -14,7 +14,7 @@ final class QRCodeScanViewModel: ObservableObject {
     
     var statusText: String {
         if scannedCode.isEmpty {
-            return "아직 스캔되지 않았습니다."
+            return "입력이 필요합니다."
         } else {
             if scannedCode == "leeo" {
                 saveCheckInHistory()

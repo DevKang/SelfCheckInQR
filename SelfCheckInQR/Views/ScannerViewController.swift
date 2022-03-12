@@ -114,5 +114,9 @@ extension ScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         
         scannerDelegate?.didFind(barcode: barcode)
         captureSession.stopRunning()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.captureSession.startRunning()
+        }
     }
 }

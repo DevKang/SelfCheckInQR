@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct Profile: Identifiable {
     var id: UUID = UUID()
@@ -19,54 +20,89 @@ struct ProfileView: View {
     @State private var showingDetails = false
     @State var detailType: DetailType = .group
     @State var isNavigationBarHidden: Bool = true
+    @Binding var showLoginPage: Bool
+    @Binding var currentTab: Tab
+    @AppStorage("loginStatus") var loginStatus = false
     
-    var body: some View{
-        
-        VStack(spacing: 0) {
-            
-            HStack{
-                Text("이현호님")
-                    .font(.largeTitle)
-                    .fontWeight(.heavy)
-                    .foregroundColor(.purple)
-                Spacer()
-            }
-            .padding()
-            .background(Color.white.ignoresSafeArea(.all, edges: .top))
-            
-            Divider()
-            NavigationView {
-                VStack {
-                    List(arrayData) { value in
-                        NavigationLink {
-                            ProfileDetailView(detailType: $detailType)
-                        } label: {
-                            HStack {
-                                Text(value.name)
-                                Spacer()
-                                Text(value.value)
-                            }
+    var body: some View {
+        NavigationView {
+            VStack {
+                List(arrayData) { value in
+                    NavigationLink {
+                        ProfileDetailView(detailType: $detailType)
+                    } label: {
+                        HStack {
+                            Text(value.name)
+                            Spacer()
+                            Text(value.value)
                         }
                     }
+                }
+                .padding(.top)
+                
+                
+                if loginStatus {
                     Button {
-                        
+                        withAnimation {
+                            loginStatus = false
+                            UserDefaults.standard.set(loginStatus,
+                                                      forKey: "loggedIn")
+                        }
+                        try! Auth.auth().signOut()
+                        currentTab = .qrcode
                     } label: {
                         Text("로그아웃")
+                            .fontWeight(.bold)
+                            .foregroundColor(Color(UIColor.label))
+                            .padding()
+                            .hCenter()
+                            .background {
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color("Purple"))
+                            }
+                            .padding(.horizontal, 40)
                     }
+                    
+                    
                 }
-                .navigationBarTitle("Profile")
-                .navigationBarHidden(self.isNavigationBarHidden)
-                .onAppear {
-                    self.isNavigationBarHidden = true
-                }.padding(.top)
             }
+            .navigationBarTitle("이현호님")
         }
         .background(Color.black.opacity(0.06).ignoresSafeArea())
+        .onAppear(perform: {
+            showLoginPage = !loginStatus
+        })
+        .sheet(isPresented: $showLoginPage,
+               onDismiss: {
+            showLoginPage = false
+            currentTab = .qrcode
+        }) {
+            LoginView(showLoginPage: $showLoginPage)
+        }
     }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileView(showLoginPage: .constant(false),
+                    currentTab: .constant(.qrcode))
+    }
+}
+
+extension View {
+    
+    func hLeading()->some View{
+        self
+            .frame(maxWidth: .infinity,alignment: .leading)
+    }
+    
+    func hTrailing()->some View{
+        self
+            .frame(maxWidth: .infinity,alignment: .trailing)
+    }
+    
+    func hCenter()->some View{
+        self
+            .frame(maxWidth: .infinity,alignment: .center)
     }
 }

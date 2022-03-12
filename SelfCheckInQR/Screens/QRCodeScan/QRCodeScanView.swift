@@ -10,13 +10,21 @@ import SwiftUI
 struct QRCodeScanView: View {
     
     @StateObject var viewModel = QRCodeScanViewModel()
+    //let width = UIScreen.main.bounds.size.width
     
     var body: some View {
         VStack {
             ScannerView(scannedCode: $viewModel.scannedCode,
                         alertItem: $viewModel.alertItem)
-                .frame(maxWidth: .infinity, maxHeight: 300)
-            
+                .frame(maxWidth: 275,
+                       maxHeight: 275)
+                .overlay(Rectangle()
+                            .stroke(Color.yellow,
+                                    style: StrokeStyle(lineWidth: 5.0,
+                                                       lineCap: .round,
+                                                       lineJoin: .bevel,
+                                                       dash: [60, 215],
+                                                       dashPhase: 29)))
             Spacer().frame(height: 60)
             
             Label("QR을 스캔해주세요:", systemImage: "qrcode.viewfinder")
