@@ -20,7 +20,7 @@ final class QRCodeScanViewModel: ObservableObject {
                 saveCheckInHistory()
                 return "출석되었습니다."
             } else {
-                return "\(scannedCode)는 올바른 값이 아닙니다."
+                return "유효하지 않은 출석코드 입니다."//"\(scannedCode)는 올바른 값이 아닙니다."
             }
         }
     }

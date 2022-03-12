@@ -64,6 +64,11 @@ struct ContentView: View {
         .padding(.bottom,10)
         .onAppear(perform: {
             loginStatus = UserDefaults.standard.bool(forKey: "loginStatus")
+            
+            let handle = Auth.auth().addStateDidChangeListener { auth, user in
+                print(auth, user)
+            }
+            print(handle)
         })
     }
 }

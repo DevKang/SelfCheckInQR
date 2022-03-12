@@ -122,7 +122,7 @@ struct HistoryView: View {
                 }
                 else{
                     
-                    Text("No Task Found")
+                    Text("체크인 메시지가 없습니다.")
                 }
             }
             .padding()

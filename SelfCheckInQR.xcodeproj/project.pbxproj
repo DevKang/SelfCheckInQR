@@ -22,6 +22,8 @@
 		586A19C327DA3391009D3479 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19C227DA3391009D3479 /* HistoryView.swift */; };
 		586A19C627DA452A009D3479 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19C527DA452A009D3479 /* ProfileView.swift */; };
 		586A19C827DA5B50009D3479 /* ProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19C727DA5B50009D3479 /* ProfileDetailView.swift */; };
+		586A19CB27DC29AA009D3479 /* QRGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19CA27DC29AA009D3479 /* QRGeneratorView.swift */; };
+		586A19CD27DC3F4F009D3479 /* GroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19CC27DC3F4F009D3479 /* GroupView.swift */; };
 		58B546EB27DB206300A5248D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B546EA27DB206200A5248D /* LoginView.swift */; };
 		58B546ED27DB222D00A5248D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B546EC27DB222D00A5248D /* LoginViewModel.swift */; };
 		58B546F027DB22F200A5248D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 58B546EF27DB22F200A5248D /* FirebaseAuth */; };
@@ -64,6 +66,8 @@
 		586A19C227DA3391009D3479 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		586A19C527DA452A009D3479 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		586A19C727DA5B50009D3479 /* ProfileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailView.swift; sourceTree = "<group>"; };
+		586A19CA27DC29AA009D3479 /* QRGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRGeneratorView.swift; sourceTree = "<group>"; };
+		586A19CC27DC3F4F009D3479 /* GroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupView.swift; sourceTree = "<group>"; };
 		58B546EA27DB206200A5248D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		58B546EC27DB222D00A5248D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		58B546F227DB25E700A5248D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -206,9 +210,19 @@
 			children = (
 				586A19C527DA452A009D3479 /* ProfileView.swift */,
 				586A19C727DA5B50009D3479 /* ProfileDetailView.swift */,
+				586A19C927DC298E009D3479 /* Details */,
 				58B546E927DB205800A5248D /* Login */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		586A19C927DC298E009D3479 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				586A19CA27DC29AA009D3479 /* QRGeneratorView.swift */,
+				586A19CC27DC3F4F009D3479 /* GroupView.swift */,
+			);
+			path = Details;
 			sourceTree = "<group>";
 		};
 		58B546E927DB205800A5248D /* Login */ = {
@@ -367,12 +381,14 @@
 			files = (
 				586A198A27DA1F69009D3479 /* ContentView.swift in Sources */,
 				586A19C627DA452A009D3479 /* ProfileView.swift in Sources */,
+				586A19CD27DC3F4F009D3479 /* GroupView.swift in Sources */,
 				586A19C327DA3391009D3479 /* HistoryView.swift in Sources */,
 				586A198827DA1F69009D3479 /* SelfCheckInQRApp.swift in Sources */,
 				586A19B427DA2395009D3479 /* QRCodeScanView.swift in Sources */,
 				586A19BA27DA270E009D3479 /* ScannerView.swift in Sources */,
 				586A19B827DA264F009D3479 /* QRCodeScanViewModel.swift in Sources */,
 				586A19C827DA5B50009D3479 /* ProfileDetailView.swift in Sources */,
+				586A19CB27DC29AA009D3479 /* QRGeneratorView.swift in Sources */,
 				58B546ED27DB222D00A5248D /* LoginViewModel.swift in Sources */,
 				58B546EB27DB206300A5248D /* LoginView.swift in Sources */,
 				586A19B627DA25F3009D3479 /* ScannerViewController.swift in Sources */,

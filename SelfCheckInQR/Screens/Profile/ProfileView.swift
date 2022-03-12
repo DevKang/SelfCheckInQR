@@ -12,24 +12,27 @@ struct Profile: Identifiable {
     var id: UUID = UUID()
     let name: String
     let value: String
+    let detailType: DetailType
 }
 
 struct ProfileView: View {
-    @State var arrayData = [Profile(name: "참가중인 그룹 코드", value: "ASDFS"),
-                            Profile(name: "로그인 된 ID", value: "leeo@kakao.com")]
+    @State var arrayData = [Profile(name: "참가중인 그룹 코드", value: "", detailType: .group),
+                            Profile(name: "로그인 된 ID", value: "leeo@kakao.com", detailType: .login),
+                            Profile(name: "QR Code 생성", value: "", detailType: .qrGenerator)
+    ]
     @State private var showingDetails = false
-    @State var detailType: DetailType = .group
     @State var isNavigationBarHidden: Bool = true
     @Binding var showLoginPage: Bool
     @Binding var currentTab: Tab
     @AppStorage("loginStatus") var loginStatus = false
+    @State private var userName: String = ""
     
     var body: some View {
         NavigationView {
             VStack {
                 List(arrayData) { value in
                     NavigationLink {
-                        ProfileDetailView(detailType: $detailType)
+                        ProfileDetailView(detailType: value.detailType)
                     } label: {
                         HStack {
                             Text(value.name)
@@ -66,16 +69,24 @@ struct ProfileView: View {
                     
                 }
             }
-            .navigationBarTitle("이현호님")
+            .navigationBarTitle("\(userName)님")
         }
         .background(Color.black.opacity(0.06).ignoresSafeArea())
         .onAppear(perform: {
             showLoginPage = !loginStatus
+            if userName == "" {
+                let randomUserName = "코알라352"
+                UserDefaults.standard.set(randomUserName,
+                                          forKey: "userName")
+            } else {
+                userName = UserDefaults.standard.string(forKey: "userName") ?? "이현호"
+            }
         })
         .sheet(isPresented: $showLoginPage,
                onDismiss: {
             showLoginPage = false
-            currentTab = .qrcode
+            #warning("for debuging")
+            // for debuging  currentTab = .qrcode
         }) {
             LoginView(showLoginPage: $showLoginPage)
         }
@@ -85,7 +96,8 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(showLoginPage: .constant(false),
-                    currentTab: .constant(.qrcode))
+                    currentTab: .constant(.qrcode),
+                    loginStatus: true)
     }
 }
 
