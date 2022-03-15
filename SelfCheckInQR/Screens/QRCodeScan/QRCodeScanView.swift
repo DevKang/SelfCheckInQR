@@ -10,7 +10,6 @@ import SwiftUI
 struct QRCodeScanView: View {
     
     @StateObject var viewModel = QRCodeScanViewModel()
-    //let width = UIScreen.main.bounds.size.width
     
     var body: some View {
         VStack {
@@ -41,7 +40,6 @@ struct QRCodeScanView: View {
                   message: Text(alertItem.message),
                   dismissButton: alertItem.dismissButton)
         }
-        
     }
 }
 

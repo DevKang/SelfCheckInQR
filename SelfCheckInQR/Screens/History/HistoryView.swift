@@ -6,27 +6,57 @@
 //
 
 import SwiftUI
+import FirebaseDatabase
+import FirebaseAuth
 
 struct HistoryView: View {
     @Binding var currentDate: Date
-    
-    // Month update on arrow button clicks...
     @State var currentMonth: Int = 0
+    
+    private let ref = Database.database().reference(withPath: "attend-history")
+    @State var tasks: [TaskMetaData] = [
+        
+//        TaskMetaData(task: [
+//            Task(title: "힘내요!")
+//        ], taskDate: getSampleDate(offset: 1)),
+        //
+        //        TaskMetaData(task: [
+        //            Task(title: "오늘도 와주셨군요!")
+        //        ], taskDate: getSampleDate(offset: 3)),
+        //
+        //        TaskMetaData(task: [
+        //            Task(title: "고마워요!")
+        //        ], taskDate: getSampleDate(offset: 6)),
+        //        TaskMetaData(task: [
+        //
+        //            Task(title: "대단해요")
+        //        ], taskDate: getSampleDate(offset: 11)),
+        //
+        //        TaskMetaData(task: [
+        //            Task(title: "노력이 쌓이네요")
+        //        ], taskDate: getSampleDate(offset: -1)),
+        //
+        //        TaskMetaData(task: [
+        //            Task(title: "기다리고 있었습니다 😂")
+        //        ], taskDate: getSampleDate(offset: -3)),
+        //
+        //        TaskMetaData(task: [
+        //            Task(title: "내일도 오실꺼죠..?")
+        //        ], taskDate: getSampleDate(offset: -5)),
+    ]
     
     var body: some View {
         
         VStack(spacing: 35) {
-            // Days...
+            
             let days: [String] = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
             
+            // Calendar header
             HStack(spacing: 20) {
-                
                 VStack(alignment: .leading, spacing: 10) {
-                    
                     Text(extraDate()[0])
                         .font(.caption)
                         .fontWeight(.semibold)
-                    
                     Text(extraDate()[1])
                         .font(.title.bold())
                 }
@@ -43,22 +73,19 @@ struct HistoryView: View {
                 }
                 
                 Button {
-                    
-                    withAnimation{
+                    withAnimation {
                         currentMonth += 1
                     }
-                    
                 } label: {
                     Image(systemName: "chevron.right")
                         .font(.title2)
                 }
             }
             .padding(.horizontal)
-            // Day View...
             
-            HStack(spacing: 0){
+            // day header
+            HStack(spacing: 0) {
                 ForEach(days,id: \.self){day in
-                    
                     Text(day)
                         .font(.callout)
                         .fontWeight(.semibold)
@@ -72,11 +99,10 @@ struct HistoryView: View {
             
             LazyVGrid(columns: columns,spacing: 15) {
                 
-                ForEach(extractDate()){ value in
-                    
+                // TODO: 날짜 넣기
+                ForEach(extractDate()) { value in
                     CardView(value: value)
                         .background(
-                            
                             Capsule()
                                 .fill(Color("Green"))
                                 .padding(.horizontal,8)
@@ -93,16 +119,11 @@ struct HistoryView: View {
                 Text("출석시간")
                     .font(.title2.bold())
                     .frame(maxWidth: .infinity,alignment: .leading)
-                    //.padding(.vertical,20)
-                
                 if let task = tasks.first(where: { task in
                     return isSameDay(date1: task.taskDate, date2: currentDate)
-                }){
-                    
+                }) {
                     ForEach(task.task){task in
-                        
                         VStack(alignment: .leading, spacing: 10) {
-                            
                             // For Custom Timing...
                             Text(task.time.addingTimeInterval(CGFloat.random(in: 0...5000)),style: .time)
                             
@@ -113,7 +134,6 @@ struct HistoryView: View {
                         .padding(.horizontal)
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .background(
-                            
                             Color("Purple")
                                 .opacity(0.5)
                                 .cornerRadius(10)
@@ -121,7 +141,6 @@ struct HistoryView: View {
                     }
                 }
                 else{
-                    
                     Text("체크인 메시지가 없습니다.")
                 }
             }
@@ -132,19 +151,56 @@ struct HistoryView: View {
             // updating Month...
             currentDate = getCurrentMonth()
         }
+        .onAppear {
+            
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let email = user.email ?? "error"
+                let userEmail = email.replacingOccurrences(of: ".", with: "*")
+                
+                ref.child(userEmail).observe(.value) {
+                    snapshot in
+                    
+                    guard let snapData = snapshot.value as? [String: String] else {return}
+                    
+                    let data = try! JSONSerialization.data(withJSONObject: Array(snapData.values), options: [])
+                    print("1, \(snapData.values)")
+                    print("2, \(snapData.values.count)")
+                    
+                    snapData.values.forEach {
+                        let singleTask = $0.data(using: .utf8)!
+                        do {
+                            let finalData = try? JSONDecoder().decode(TaskMetaData.self,
+                                                                      from: singleTask)
+                            tasks.append(finalData!)
+                            print("value is \(finalData?.task.first?.time)")
+                            print("value is \(finalData?.task.first?.title)")
+                        } catch {
+                            print("encoding error")
+                        }
+                        
+                    }
+                    
+                    
+                }
+                
+            }
+            
+            //            tasks.append(TaskMetaData(task: [
+            //                Task(title: "힘내요!")
+            //            ], taskDate: getSampleDate(offset: 2)))
+        }
     }
     
+    
     @ViewBuilder
-    func CardView(value: DateValue)->some View{
-        
-        VStack{
-            
-            if value.day != -1{
+    func CardView(value: DateValue) -> some View {
+        VStack {
+            if value.day != -1 {
                 
                 if let task = tasks.first(where: { task in
-                    
                     return isSameDay(date1: task.taskDate, date2: value.date)
-                }){
+                }) {
                     Text("\(value.day)")
                         .font(.title3.bold())
                         .foregroundColor(isSameDay(date1: task.taskDate, date2: currentDate) ? .white : .primary)
@@ -259,24 +315,26 @@ struct DateValue: Identifiable{
     var date: Date
 }
 
-
+import Firebase
 // Task Model and Sample Tasks...
 // Array of Tasks...
-struct Task: Identifiable{
+struct Task: Identifiable, Codable {
     var id = UUID().uuidString
     var title: String
     var time: Date = Date()
 }
 
 // Total Task Meta View...
-struct TaskMetaData: Identifiable{
+struct TaskMetaData: Identifiable, Codable {
     var id = UUID().uuidString
     var task: [Task]
     var taskDate: Date
 }
 
+
+
 // sample Date for Testing...
-func getSampleDate(offset: Int)->Date{
+func getSampleDate(offset: Int)->Date {
     let calender = Calendar.current
     
     let date = calender.date(byAdding: .day, value: offset, to: Date())
@@ -285,33 +343,4 @@ func getSampleDate(offset: Int)->Date{
 }
 
 // Sample Tasks...
-var tasks: [TaskMetaData] = [
 
-    TaskMetaData(task: [
-        Task(title: "힘내요!")
-    ], taskDate: getSampleDate(offset: 1)),
-    
-    TaskMetaData(task: [
-        Task(title: "오늘도 와주셨군요!")
-    ], taskDate: getSampleDate(offset: 3)),
-    
-    TaskMetaData(task: [
-        Task(title: "고마워요!")
-    ], taskDate: getSampleDate(offset: 6)),
-    TaskMetaData(task: [
-        
-        Task(title: "대단해요")
-    ], taskDate: getSampleDate(offset: 11)),
-    
-    TaskMetaData(task: [
-        Task(title: "노력이 쌓이네요")
-    ], taskDate: getSampleDate(offset: -1)),
-    
-    TaskMetaData(task: [
-        Task(title: "기다리고 있었습니다 😂")
-    ], taskDate: getSampleDate(offset: -3)),
-    
-    TaskMetaData(task: [
-        Task(title: "내일도 오실꺼죠..?")
-    ], taskDate: getSampleDate(offset: -5)),
-]

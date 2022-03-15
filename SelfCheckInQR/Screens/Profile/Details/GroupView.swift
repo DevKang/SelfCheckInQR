@@ -10,14 +10,23 @@ import SwiftUI
 struct GroupView: View {
     @State var groupCode: String = ""
     @State var completeMessage: String = ""
+    @State var isAddGroupViewShow: Bool = false
     
     var body: some View {
         VStack(alignment: .center) {
             // TODO: 그룹 생성하기 문제
-            // 1 + 버튼 넣기
-            // 2 모달 띄우기
             // 3 파베에 그룹 코드 넣기
             // 4 그룹코드에는 오너도 넣기
+            HStack {
+                Spacer()
+                Button {
+                    isAddGroupViewShow = true
+                } label: {
+                    Image(systemName: "person.3")
+                        .foregroundColor(Color("Purple"))
+                }
+            }
+            .padding(.bottom)
             
             TextField("그룹 코드를 입력해주세요.", text: $groupCode)
                 .modifier(ShadowModifier())
@@ -27,6 +36,10 @@ struct GroupView: View {
                 
             Button(action: {
                 //TODO: 그룹코드 저장
+                //groupCode.uppercased()
+                UserDefaults.standard.set(groupCode.uppercased(),
+                                          forKey: "groupCode")
+                print(groupCode.uppercased())
                 groupCode = ""
                 completeMessage = "코드가 입력되었습니다."
             }, label: {
@@ -47,6 +60,11 @@ struct GroupView: View {
                 .padding(.vertical, 30)
             Spacer()
         }
+        .sheet(isPresented: $isAddGroupViewShow,
+//               onDismiss: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>,
+               content: {
+            AddGroupView(isAddGroupViewShow: $isAddGroupViewShow)
+        })
         .frame(maxWidth: .infinity)
         .padding()
     }

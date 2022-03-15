@@ -11,17 +11,15 @@ import Firebase
 struct Profile: Identifiable {
     var id: UUID = UUID()
     let name: String
-    let value: String
+    var value: String
     let detailType: DetailType
 }
 
 struct ProfileView: View {
     @State var arrayData = [Profile(name: "참가중인 그룹 코드", value: "", detailType: .group),
-                            Profile(name: "로그인 된 ID", value: "leeo@kakao.com", detailType: .login),
-                            Profile(name: "QR Code 생성", value: "", detailType: .qrGenerator)
+                            Profile(name: "로그인 된 ID", value: "", detailType: .login),
     ]
     @State private var showingDetails = false
-    @State var isNavigationBarHidden: Bool = true
     @Binding var showLoginPage: Bool
     @Binding var currentTab: Tab
     @AppStorage("loginStatus") var loginStatus = false
@@ -69,24 +67,56 @@ struct ProfileView: View {
                     
                 }
             }
-            .navigationBarTitle("\(userName)님")
+            .onAppear(perform: {
+                
+                let isLogedIn = UserDefaults.standard.bool(forKey: "isGroupAdmin")
+                
+                if isLogedIn {
+                    if arrayData.count < 3 {
+                        arrayData.append(Profile(name: "QR Code 생성", value: "", detailType: .qrGenerator))
+                    }
+                }
+            })
+            .navigationBarTitle("\(userName)님", displayMode: .inline)
         }
         .background(Color.black.opacity(0.06).ignoresSafeArea())
         .onAppear(perform: {
+            
+            // TODO: 사용자 데이터 불러오기
+            // 만약 데이터가 있다면 불러오고
+            // 없으면 기본값으로 셋팅하기
+            
             showLoginPage = !loginStatus
             if userName == "" {
                 let randomUserName = "코알라352"
                 UserDefaults.standard.set(randomUserName,
                                           forKey: "userName")
+                userName = randomUserName
             } else {
                 userName = UserDefaults.standard.string(forKey: "userName") ?? "이현호"
+            }
+            
+            if arrayData[0].value == "" {
+                
+                if let loginStatus = UserDefaults.standard.string(forKey: "groupCode") {
+                    arrayData[0].value = loginStatus
+                } else {
+                    arrayData[0].value = "미참가"
+                }
+            }
+            
+            if arrayData[1].value == "" {
+                let user = Auth.auth().currentUser
+                if let user = user {
+                    arrayData[1].value = user.email ?? "error"
+                }
             }
         })
         .sheet(isPresented: $showLoginPage,
                onDismiss: {
             showLoginPage = false
             #warning("for debuging")
-            // for debuging  currentTab = .qrcode
+            currentTab = .qrcode
         }) {
             LoginView(showLoginPage: $showLoginPage)
         }

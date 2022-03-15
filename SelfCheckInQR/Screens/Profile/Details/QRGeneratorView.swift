@@ -13,12 +13,8 @@ struct QRGeneratorView: View {
     let context = CIContext()
     let filter = CIFilter.qrCodeGenerator()
     
-    private let code = "ASDFGH"
-    private let todayDate = "2022-03-12"
-    
     var body: some View {
-        let encode = encodeDataToBase64(code: code, todayDate: todayDate)
-        
+        let encode = QRGenerator().encodeDataToBase64()
         Image(uiImage: generateQRCode(from: "\(encode)"))
             .interpolation(.none)
             .resizable()
@@ -26,16 +22,7 @@ struct QRGeneratorView: View {
             .frame(width: 200, height: 200)
     }
     
-    private func encodeDataToBase64(code: String, todayDate: String) -> String {
-        let stringData = code + todayDate
-        let data = stringData.data (using: .utf8)
-
-        guard let encode = data?.base64EncodedString() else {
-            return "error"
-        }
-        
-        return encode
-    }
+    
     
     private func generateQRCode(from string: String) -> UIImage {
         filter.message = Data(string.utf8)

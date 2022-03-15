@@ -24,9 +24,13 @@
 		586A19C827DA5B50009D3479 /* ProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19C727DA5B50009D3479 /* ProfileDetailView.swift */; };
 		586A19CB27DC29AA009D3479 /* QRGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19CA27DC29AA009D3479 /* QRGeneratorView.swift */; };
 		586A19CD27DC3F4F009D3479 /* GroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19CC27DC3F4F009D3479 /* GroupView.swift */; };
+		586A19CF27DC7BDD009D3479 /* AddGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19CE27DC7BDD009D3479 /* AddGroupView.swift */; };
+		586A19D227DE0C8D009D3479 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 586A19D127DE0C8D009D3479 /* FirebaseAuth */; };
+		586A19D427DE0C8D009D3479 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 586A19D327DE0C8D009D3479 /* FirebaseDatabase */; };
+		586A19D627DE0C8D009D3479 /* FirebaseDatabaseSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 586A19D527DE0C8D009D3479 /* FirebaseDatabaseSwift-Beta */; };
+		586A19D827DE1922009D3479 /* QRGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A19D727DE1922009D3479 /* QRGenerator.swift */; };
 		58B546EB27DB206300A5248D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B546EA27DB206200A5248D /* LoginView.swift */; };
 		58B546ED27DB222D00A5248D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B546EC27DB222D00A5248D /* LoginViewModel.swift */; };
-		58B546F027DB22F200A5248D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 58B546EF27DB22F200A5248D /* FirebaseAuth */; };
 		58B546F327DB25E700A5248D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58B546F227DB25E700A5248D /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +72,8 @@
 		586A19C727DA5B50009D3479 /* ProfileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailView.swift; sourceTree = "<group>"; };
 		586A19CA27DC29AA009D3479 /* QRGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRGeneratorView.swift; sourceTree = "<group>"; };
 		586A19CC27DC3F4F009D3479 /* GroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupView.swift; sourceTree = "<group>"; };
+		586A19CE27DC7BDD009D3479 /* AddGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupView.swift; sourceTree = "<group>"; };
+		586A19D727DE1922009D3479 /* QRGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRGenerator.swift; sourceTree = "<group>"; };
 		58B546EA27DB206200A5248D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		58B546EC27DB222D00A5248D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		58B546F227DB25E700A5248D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -79,7 +85,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58B546F027DB22F200A5248D /* FirebaseAuth in Frameworks */,
+				586A19D627DE0C8D009D3479 /* FirebaseDatabaseSwift-Beta in Frameworks */,
+				586A19D427DE0C8D009D3479 /* FirebaseDatabase in Frameworks */,
+				586A19D227DE0C8D009D3479 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +115,7 @@
 				586A199727DA1F6A009D3479 /* SelfCheckInQRTests */,
 				586A19A127DA1F6A009D3479 /* SelfCheckInQRUITests */,
 				586A198527DA1F69009D3479 /* Products */,
+				586A19D927DE2AF8009D3479 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -221,8 +230,17 @@
 			children = (
 				586A19CA27DC29AA009D3479 /* QRGeneratorView.swift */,
 				586A19CC27DC3F4F009D3479 /* GroupView.swift */,
+				586A19CE27DC7BDD009D3479 /* AddGroupView.swift */,
+				586A19D727DE1922009D3479 /* QRGenerator.swift */,
 			);
 			path = Details;
+			sourceTree = "<group>";
+		};
+		586A19D927DE2AF8009D3479 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		58B546E927DB205800A5248D /* Login */ = {
@@ -259,7 +277,9 @@
 			);
 			name = SelfCheckInQR;
 			packageProductDependencies = (
-				58B546EF27DB22F200A5248D /* FirebaseAuth */,
+				586A19D127DE0C8D009D3479 /* FirebaseAuth */,
+				586A19D327DE0C8D009D3479 /* FirebaseDatabase */,
+				586A19D527DE0C8D009D3479 /* FirebaseDatabaseSwift-Beta */,
 			);
 			productName = SelfCheckInQR;
 			productReference = 586A198427DA1F69009D3479 /* SelfCheckInQR.app */;
@@ -334,7 +354,7 @@
 			);
 			mainGroup = 586A197B27DA1F68009D3479;
 			packageReferences = (
-				58B546EE27DB22F200A5248D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				586A19D027DE0C8D009D3479 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 586A198527DA1F69009D3479 /* Products */;
 			projectDirPath = "";
@@ -385,6 +405,8 @@
 				586A19C327DA3391009D3479 /* HistoryView.swift in Sources */,
 				586A198827DA1F69009D3479 /* SelfCheckInQRApp.swift in Sources */,
 				586A19B427DA2395009D3479 /* QRCodeScanView.swift in Sources */,
+				586A19D827DE1922009D3479 /* QRGenerator.swift in Sources */,
+				586A19CF27DC7BDD009D3479 /* AddGroupView.swift in Sources */,
 				586A19BA27DA270E009D3479 /* ScannerView.swift in Sources */,
 				586A19B827DA264F009D3479 /* QRCodeScanViewModel.swift in Sources */,
 				586A19C827DA5B50009D3479 /* ProfileDetailView.swift in Sources */,
@@ -725,21 +747,31 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		58B546EE27DB22F200A5248D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		586A19D027DE0C8D009D3479 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		58B546EF27DB22F200A5248D /* FirebaseAuth */ = {
+		586A19D127DE0C8D009D3479 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 58B546EE27DB22F200A5248D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 586A19D027DE0C8D009D3479 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		586A19D327DE0C8D009D3479 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 586A19D027DE0C8D009D3479 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		586A19D527DE0C8D009D3479 /* FirebaseDatabaseSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 586A19D027DE0C8D009D3479 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseDatabaseSwift-Beta";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
