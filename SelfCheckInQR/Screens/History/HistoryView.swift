@@ -14,36 +14,7 @@ struct HistoryView: View {
     @State var currentMonth: Int = 0
     
     private let ref = Database.database().reference(withPath: "attend-history")
-    @State var tasks: [TaskMetaData] = [
-        
-//        TaskMetaData(task: [
-//            Task(title: "힘내요!")
-//        ], taskDate: getSampleDate(offset: 1)),
-        //
-        //        TaskMetaData(task: [
-        //            Task(title: "오늘도 와주셨군요!")
-        //        ], taskDate: getSampleDate(offset: 3)),
-        //
-        //        TaskMetaData(task: [
-        //            Task(title: "고마워요!")
-        //        ], taskDate: getSampleDate(offset: 6)),
-        //        TaskMetaData(task: [
-        //
-        //            Task(title: "대단해요")
-        //        ], taskDate: getSampleDate(offset: 11)),
-        //
-        //        TaskMetaData(task: [
-        //            Task(title: "노력이 쌓이네요")
-        //        ], taskDate: getSampleDate(offset: -1)),
-        //
-        //        TaskMetaData(task: [
-        //            Task(title: "기다리고 있었습니다 😂")
-        //        ], taskDate: getSampleDate(offset: -3)),
-        //
-        //        TaskMetaData(task: [
-        //            Task(title: "내일도 오실꺼죠..?")
-        //        ], taskDate: getSampleDate(offset: -5)),
-    ]
+    @State var tasks: [TaskMetaData] = []
     
     var body: some View {
         
@@ -125,7 +96,7 @@ struct HistoryView: View {
                     ForEach(task.task){task in
                         VStack(alignment: .leading, spacing: 10) {
                             // For Custom Timing...
-                            Text(task.time.addingTimeInterval(CGFloat.random(in: 0...5000)),style: .time)
+                            Text(extraStringTime(attendDate: task.time))
                             
                             Text(task.title)
                                 .font(.title2.bold())
@@ -235,7 +206,16 @@ struct HistoryView: View {
     }
     
     // extrating Year And Month for display...
-    func extraDate()->[String]{
+    func extraStringTime(attendDate: Date) -> String {
+
+        let date = DateFormatter()
+        date.dateFormat = "a HH시 mm분"
+        let todayDate = date.string(from: attendDate)
+
+        return todayDate
+    }
+    
+    func extraDate() -> [String] {
         
         let calendar = Calendar.current
         let month = calendar.component(.month, from: currentDate) - 1
@@ -256,7 +236,7 @@ struct HistoryView: View {
         return currentMonth
     }
     
-    func extractDate()->[DateValue]{
+    func extractDate() -> [DateValue]{
         
         let calendar = Calendar.current
         
@@ -291,7 +271,7 @@ struct HistoryView_Previews: PreviewProvider {
 // Extending Date to get Current Month Dates...
 extension Date {
     
-    func getAllDates()->[Date]{
+    func getAllDates()->[Date] {
         
         let calendar = Calendar.current
         
@@ -315,7 +295,6 @@ struct DateValue: Identifiable{
     var date: Date
 }
 
-import Firebase
 // Task Model and Sample Tasks...
 // Array of Tasks...
 struct Task: Identifiable, Codable {
@@ -334,13 +313,40 @@ struct TaskMetaData: Identifiable, Codable {
 
 
 // sample Date for Testing...
-func getSampleDate(offset: Int)->Date {
-    let calender = Calendar.current
-    
-    let date = calender.date(byAdding: .day, value: offset, to: Date())
-    
-    return date ?? Date()
-}
+//func getSampleDate(offset: Int)->Date {
+//    let calender = Calendar.current
+//
+//    let date = calender.date(byAdding: .day, value: offset, to: Date())
+//
+//    return date ?? Date()
+//}
 
 // Sample Tasks...
 
+//        TaskMetaData(task: [
+//            Task(title: "힘내요!")
+//        ], taskDate: getSampleDate(offset: 1)),
+//
+//        TaskMetaData(task: [
+//            Task(title: "오늘도 와주셨군요!")
+//        ], taskDate: getSampleDate(offset: 3)),
+//
+//        TaskMetaData(task: [
+//            Task(title: "고마워요!")
+//        ], taskDate: getSampleDate(offset: 6)),
+//        TaskMetaData(task: [
+//
+//            Task(title: "대단해요")
+//        ], taskDate: getSampleDate(offset: 11)),
+//
+//        TaskMetaData(task: [
+//            Task(title: "노력이 쌓이네요")
+//        ], taskDate: getSampleDate(offset: -1)),
+//
+//        TaskMetaData(task: [
+//            Task(title: "기다리고 있었습니다 😂")
+//        ], taskDate: getSampleDate(offset: -3)),
+//
+//        TaskMetaData(task: [
+//            Task(title: "내일도 오실꺼죠..?")
+//        ], taskDate: getSampleDate(offset: -5)),

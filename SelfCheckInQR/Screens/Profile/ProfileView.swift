@@ -41,7 +41,6 @@ struct ProfileView: View {
                 }
                 .padding(.top)
                 
-                
                 if loginStatus {
                     Button {
                         withAnimation {
@@ -88,10 +87,16 @@ struct ProfileView: View {
             
             showLoginPage = !loginStatus
             if userName == "" {
-                let randomUserName = "코알라352"
-                UserDefaults.standard.set(randomUserName,
-                                          forKey: "userName")
-                userName = randomUserName
+                let randomUserName = getTempRandomUsername()
+                if let tempUserName = UserDefaults.standard.string(forKey: "userName") {
+                    userName = tempUserName
+                } else {
+                    UserDefaults.standard.set(randomUserName,
+                                              forKey: "userName")
+                    userName = randomUserName
+                }
+                
+                
             } else {
                 userName = UserDefaults.standard.string(forKey: "userName") ?? "이현호"
             }
@@ -115,11 +120,16 @@ struct ProfileView: View {
         .sheet(isPresented: $showLoginPage,
                onDismiss: {
             showLoginPage = false
-            #warning("for debuging")
             currentTab = .qrcode
         }) {
             LoginView(showLoginPage: $showLoginPage)
         }
+    }
+    
+    private func getTempRandomUsername() -> String {
+        let animalNames = ["기린", "코끼리", "사자", "팬더", "고라니"]
+        let randomNumber = Int.random(in: 0...999)
+        return "\(animalNames.randomElement() ?? "비둘기")\(randomNumber)"
     }
 }
 

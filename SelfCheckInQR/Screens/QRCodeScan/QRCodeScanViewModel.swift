@@ -59,12 +59,12 @@ final class QRCodeScanViewModel: ObservableObject {
 //            date.dateFormat = "yyyy-MM-dd HH:mm:ss"
             
             let attendData = TaskMetaData(task: [
-                Task(title: "힘내요!2", time: now)
+                Task(title: getRandomCheeringMessage(), time: now)
             ], taskDate: now)
             
             let date = DateFormatter()
             date.dateFormat = "yyyy-MM-dd"
-            let todayDate = date.string(from: now)
+            // let todayDate = date.string(from: now)
             //
 //
 //                let date = DateFormatter()
@@ -82,5 +82,11 @@ final class QRCodeScanViewModel: ObservableObject {
             }
         }
         print("출석 이력이 저장되었습니다")
+    }
+    
+    private func getRandomCheeringMessage() -> String {
+        #warning("응원메시지")
+        let cheeringMessages = ["좋아요!", "힘내요!", "잘 하고 있어요!", "멋져요!", "대단해요!"]
+        return cheeringMessages.randomElement() ?? "굉장해요!"
     }
 }

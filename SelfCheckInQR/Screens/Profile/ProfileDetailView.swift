@@ -16,12 +16,15 @@ enum DetailType {
 struct ProfileDetailView: View {
     
     @State var detailType: DetailType
-    
+    @State var insertGroupCode: String = ""
     var body: some View {
         switch detailType {
         case .group:
             // 그룹 참여하기
-            GroupView()
+            GroupView(insertGroupCode: $insertGroupCode)
+                .onAppear {
+                    insertGroupCode = UserDefaults.standard.string(forKey: "groupCode") ?? "NODATA"
+                }
         case .login:
             Text("login")
         //TODO: 그룹 오너만 생성할 수 있게하기

@@ -11,6 +11,7 @@ struct GroupView: View {
     @State var groupCode: String = ""
     @State var completeMessage: String = ""
     @State var isAddGroupViewShow: Bool = false
+    @Binding var insertGroupCode: String
     
     var body: some View {
         VStack(alignment: .center) {
@@ -37,9 +38,20 @@ struct GroupView: View {
             Button(action: {
                 //TODO: 그룹코드 저장
                 //groupCode.uppercased()
+                
+                if groupCode.count > 6 {
+                    let endIndex = groupCode.index(groupCode.startIndex, offsetBy: 5)
+                    let range = ...endIndex
+                    insertGroupCode = groupCode[range].uppercased()
+                } else {
+                    insertGroupCode = groupCode.uppercased()
+                }
+                
                 UserDefaults.standard.set(groupCode.uppercased(),
                                           forKey: "groupCode")
-                print(groupCode.uppercased())
+                
+                #warning("뒤로가기 화면 새로 그리기 insertGroupCode")
+                print(insertGroupCode)
                 groupCode = ""
                 completeMessage = "코드가 입력되었습니다."
             }, label: {
@@ -72,7 +84,7 @@ struct GroupView: View {
 
 struct GroupView_Previews: PreviewProvider {
     static var previews: some View {
-        GroupView()
+        GroupView(insertGroupCode: .constant("EXAM"))
     }
 }
 
